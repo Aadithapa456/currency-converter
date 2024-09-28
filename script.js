@@ -196,18 +196,18 @@ submitBtn.addEventListener("click", () => {
 inputAmount.addEventListener("keydown", (event) => {
    if (event.key == "Enter") {
       fetchCurrencyData();
-      event.preventDefault();
+      event.preventDefault(); // Prevents the default form submission action
    }
 });
 function showConvertedCurrency(data) {
    requiredCurrencyVal = requiredCurrency.value;
-   let conversionRate = data.conversion_rates[requiredCurrencyVal].toFixed(2);
-   let convertedValue = (conversionRate * inputAmount.value).toFixed(2);
+   let conversionRate = data.conversion_rates[requiredCurrencyVal].toFixed(2); // Exctracts the rate of req currency from the API
+   let convertedValue = (conversionRate * inputAmount.value).toFixed(2); // Converts the given amount to amount in required currency
+   //Checks if the select tag of both req and current currency is same
    if (options[0].value == options[1].value) {
       let nextIndex = (options[1].selectedIndex + 1) % options.length; // Moves the selected drop-down item by 1
       options[1].selectedIndex = nextIndex;
       result.innerHTML = `You chose the same Currency`;
-      console.log("WTF");
    } else {
       result.innerHTML = `${inputAmount.value} ${currentCurrency.value} = ${convertedValue} ${requiredCurrency.value}`;
    }

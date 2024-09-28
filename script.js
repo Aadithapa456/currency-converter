@@ -167,39 +167,49 @@ async function fetchCurrencyData() {
          url + `${apiKey}/latest/${currentCurrency.value}`
       );
       const data = await response.json();
-      //   console.log(result);
       showConvertedCurrency(data);
    } catch (error) {
       console.error(error);
    }
 }
-function currencyList(country_list) {
-   for (let i = 0; i <options.length; i++) {
-      for (const currency_code in country_list) {
-         let optionTag = `<option value= "${currency_code}">${currency_code}</option>`;
-         options[i].insertAdjacentHTML("beforeend", optionTag);
-      }
-   }
-}
-function checkCurrentCurrencySelection(){
-   for (let i = 0; i <options.length; i++) {
-   }
-}
+// DOM Elements
 let options = document.querySelectorAll("select");
 let submitBtn = document.querySelector("#submit");
 let inputAmount = document.querySelector("#user-input");
 let currentCurrency = document.querySelector("#current-currency");
 let requiredCurrency = document.querySelector("#required-currency");
 let requiredCurrencyVal;
+//Default Input value
 let result = document.querySelector(".result");
+inputAmount.value = "1";
+function currencyList(country_list) {
+   for (let i = 0; i < options.length; i++) {
+      for (const currency_code in country_list) {
+         let optionTag = `<option value= "${currency_code}">${currency_code}</option>`;
+         options[i].insertAdjacentHTML("beforeend", optionTag); //Adds the country code in the select drop-down
+      }
+   }
+}
 submitBtn.addEventListener("click", () => {
    fetchCurrencyData();
+});
+inputAmount.addEventListener("keydown", (event) => {
+   if (event.key == "Enter") {
+      fetchCurrencyData();
+      event.preventDefault();
+   }
 });
 function showConvertedCurrency(data) {
    requiredCurrencyVal = requiredCurrency.value;
    let conversionRate = data.conversion_rates[requiredCurrencyVal].toFixed(2);
    let convertedValue = (conversionRate * inputAmount.value).toFixed(2);
-   console.log(requiredCurrencyVal);
-   result.innerHTML = `${inputAmount.value} ${currentCurrency.value} = ${convertedValue} ${requiredCurrency.value}`;
+   if (options[0].value == options[1].value) {
+      let nextIndex = (options[1].selectedIndex + 1) % options.length; // Moves the selected drop-down item by 1
+      options[1].selectedIndex = nextIndex;
+      result.innerHTML = `You chose the same Currency`;
+      console.log("WTF");
+   } else {
+      result.innerHTML = `${inputAmount.value} ${currentCurrency.value} = ${convertedValue} ${requiredCurrency.value}`;
+   }
 }
 currencyList(country_list);

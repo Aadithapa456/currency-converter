@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="currency-card-container">
+        <div class="title">
+            <p>Currency Converter</p>
+        </div>
+        <div class="currency-input">
+            <form class="flex">
+                <input type="number" name="currency" placeholder="Enter amount" id="user-input">
+                <div class="dropdown-area">
+                    <select id="current-currency">
+                        <option value="NPR" selected>NPR</option>
+                        <option value="INR">INR</option>
+                        <option value="USD">USD</option>
+                    </select>
+                    <div class="to">To</div>
+                    <select id="required-currency">
+                        <option value="INR" selected>INR</option>
+                        <option value="NPR">NPR</option>
+                        <option value="USD">USD</option>
+                    </select>
+                </div>
+            </form>
+            <div class="submit-btn">
+                <button id="submit">Submit</button>
+            </div>
+        </div>
+        <div class="converted-currency">
+            <div class="result">
+                1NPR = 20USD
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

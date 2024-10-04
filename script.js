@@ -1,4 +1,4 @@
-const apiKey = "4bc189952d7160569282ef5e";
+import { API_KEY } from "/api_key.js";
 const url = "https://v6.exchangerate-api.com/v6/";
 let country_list = {
    AED: "AE",
@@ -164,7 +164,7 @@ let country_list = {
 async function fetchCurrencyData() {
    try {
       const response = await fetch(
-         url + `${apiKey}/latest/${currentCurrency.value}`
+         url + `${API_KEY}/latest/${currentCurrency.value}`
       );
       const data = await response.json();
       showConvertedCurrency(data);
